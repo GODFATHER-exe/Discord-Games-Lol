@@ -76,12 +76,13 @@ class ChessButton(WordInputButton):
             if self.label == "Cancel":
                 self.view.disable_all()
                 await interaction.message.edit(view=self.view)
-                await interaction.response.send_message(f"<:tick:1120664408050372669> | Game Over, Cancelled by interaction.user.id")
+                username = interaction.user.name
+                await interaction.response.send_message(f"<:tick:1120664408050372669> | Game Over, Cancelled by {username}.")
                 return self.view.stop()
             else:
                 if interaction.user != game.turn:
                     return await interaction.response.send_message(
-                        "<:cross:1120656618296717312> | Wait for your turn", ephemeral=True
+                        "<:cross:1120656618296717312> | Wait for your turn.", ephemeral=True
                     )
                 else:
                     return await interaction.response.send_modal(ChessInput(self.view))
