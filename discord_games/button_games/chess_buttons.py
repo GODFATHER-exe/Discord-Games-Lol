@@ -77,7 +77,7 @@ class ChessButton(WordInputButton):
                 self.view.disable_all()
                 await interaction.message.edit(view=self.view)
                 username = interaction.user.name
-                await interaction.response.send_message(f"<:tick:1120664408050372669> | Game Over, Cancelled by {username}.")
+                await interaction.response.send_message(f"Game Over, Cancelled by {username}.")
                 return self.view.stop()
             else:
                 if interaction.user != game.turn:
