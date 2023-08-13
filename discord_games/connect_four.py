@@ -166,7 +166,7 @@ class ConnectFour:
         self.embed_color = 0x01f5b6
 
         embed = self.make_embed(status=False)
-        self.message = await ctx.send(self.board_string(), embed=embed, **kwargs)
+        self.message = await ctx.send(embed=embed, **kwargs)
 
         for button in self._controls:
             await self.message.add_reaction(button)
