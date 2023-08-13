@@ -104,7 +104,6 @@ class BetaConnectFour(ConnectFour):
 
         embed = self.make_embed(status=False)
         self.message = await ctx.send(
-            content=self.board_string(),
             view=self.view,
             embed=embed,
         )
