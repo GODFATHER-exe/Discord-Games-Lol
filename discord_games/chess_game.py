@@ -29,12 +29,12 @@ class Chess:
         return "white" if self.turn == self.white else "black"
 
     async def make_embed(self) -> discord.Embed:
-        embed = discord.Embed(title="Chess Game", color=0x01f5b6)
-        embed.description = f"**Turn:** `{self.turn}`\n**Color:** `{self.get_color()}`\n**Check:** `{self.board.is_check()}`"
+        embed = discord.Embed(title="Chess", color=0x2C2F33)
+        embed.description = f"**Color:** `{self.get_color()}`\n**Turn:** `{self.turn}`\n**Is Check?:** `{self.board.is_check()}`"
         embed.set_image(url=f"{self.BASE_URL}{self.board.board_fen()}")
 
         embed.add_field(
-            name="Last Move",
+            name="Last Move Recorded",
             value=f"```yml\n{self.last_move.get('color', '-')}: {self.last_move.get('move', '-')}\n```",
         )
         return embed
@@ -55,11 +55,11 @@ class Chess:
         elif self.board.is_stalemate():
             embed.description = f"Game over\nStalemate | Score: `{results}`"
         elif self.board.is_insufficient_material():
-            embed.description = f"Game over\nInsufficient material left to continue the game | Score: `{results}`"
+            embed.description = f"Game over\nCannot continue the game | Score: `{results}`"
         elif self.board.is_seventyfive_moves():
-            embed.description = f"Game over\n75-moves rule | Score: `{results}`"
+            embed.description = f"Game over\n75 moves rule | Score: `{results}`"
         elif self.board.is_fivefold_repetition():
-            embed.description = f"Game over\nFive-fold repitition. | Score: `{results}`"
+            embed.description = f"Game over\nFive fold repitition. | Score: `{results}`"
         else:
             embed.description = (
                 f"Game over\nVariant end condition. | Score: `{results}`"
@@ -132,6 +132,6 @@ class Chess:
 
         embed = await self.fetch_results()
         await self.message.edit(embed=embed)
-        await ctx.send("~ Game Over ~")
+        await ctx.send("Game Over")
 
         return self.message
