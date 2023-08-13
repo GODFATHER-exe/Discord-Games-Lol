@@ -49,7 +49,6 @@ class ConnectFourButton(discord.ui.Button["ConnectFourView"]):
         return await interaction.response.edit_message(
             view=self.view,
             embed=embed,
-            content=game.board_string(),
         )
 
 
