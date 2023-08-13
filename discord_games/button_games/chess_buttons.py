@@ -47,7 +47,7 @@ class ChessInput(discord.ui.Modal, title="Make your move"):
 
         if not is_valid_uci:
             return await interaction.response.send_message(
-                f"Invalid coordinates for move: `{from_coord} -> {to_coord}`",
+                f"<:cross:1120656618296717312> | Invalid coordinates, cannot move from`{from_coord}` to `{to_coord}`",
                 ephemeral=True,
             )
         else:
@@ -70,7 +70,7 @@ class ChessButton(WordInputButton):
         game = self.view.game
         if interaction.user not in (game.black, game.white):
             return await interaction.response.send_message(
-                "You are not part of this game!", ephemeral=True
+                "<:cross:1120656618296717312> | You are not playing this game.", ephemeral=True
             )
         else:
             if self.label == "Cancel":
@@ -95,7 +95,7 @@ class ChessView(BaseView):
         self.game = game
 
         inpbutton = ChessButton()
-        inpbutton.label = "Make your move!"
+        inpbutton.label = "Move"
 
         self.add_item(inpbutton)
         self.add_item(ChessButton(cancel_button=True))
@@ -114,7 +114,7 @@ class BetaChess(Chess):
         timeout: Optional[float] = None,
     ) -> discord.Message:
         """
-        starts the Chess(buttons) Game
+        Play Chess Game
 
         Parameters
         ----------
