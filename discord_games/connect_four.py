@@ -60,8 +60,8 @@ class ConnectFour:
             embed.title = "Connect 4!"
             embed.description = f"{self.red_player.name} **VS** {self.blue_player.name}\n\n**Turn:** {self.turn.name}\n**Color:** `{self.player_to_emoji[self.turn]}`\n\n{self.board_string()}"
         else:
-            status_ = f"{self.winner} won!" if self.winner else "Tie"
-            embed.description = f"**Game over**\n{status_}"
+            status_ = f"{self.winner.name} won!" if self.winner else "Tie"
+            embed.description = f"**Game over**\n{status_}\n\n{self.board_string()}"
         return embed
 
     def place_move(self, column: Union[str, int], user) -> list[list[str]]:
