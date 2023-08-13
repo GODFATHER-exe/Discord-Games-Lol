@@ -57,7 +57,8 @@ class ConnectFour:
     def make_embed(self, *, status: bool) -> discord.Embed:
         embed = discord.Embed(color=0x01f5b6)
         if not status:
-            embed.description = f"**Turn:** {self.turn.name}\n**Piece:** `{self.player_to_emoji[self.turn]}`"
+            embed.title = "Connect 4!"
+            embed.description = f"self.red_player.user.name **VS** self.blue_player.user.name\n\n**Turn:** {self.turn.name}\n**Color:** `{self.player_to_emoji[self.turn]}`"
         else:
             status_ = f"{self.winner} won!" if self.winner else "Tie"
             embed.description = f"**Game over**\n{status_}"
