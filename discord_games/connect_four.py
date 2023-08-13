@@ -49,10 +49,11 @@ class ConnectFour:
         }
 
     def board_string(self) -> str:
-        board = "1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣\n"
-        for row in self.board:
-            board += "".join(row) + "\n"
-        return board
+    board = ""
+    for row in self.board:
+        board += "".join(row) + "\n"
+    return board
+
 
     def make_embed(self, *, status: bool) -> discord.Embed:
         embed = discord.Embed(color=0x01f5b6)
