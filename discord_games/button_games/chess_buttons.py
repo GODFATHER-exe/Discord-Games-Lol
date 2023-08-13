@@ -81,7 +81,7 @@ class ChessButton(WordInputButton):
             else:
                 if interaction.user != game.turn:
                     return await interaction.response.send_message(
-                        "It is not your turn yet!", ephemeral=True
+                        "<:cross:1120656618296717312> | Wait for your turn", ephemeral=True
                     )
                 else:
                     return await interaction.response.send_modal(ChessInput(self.view))
