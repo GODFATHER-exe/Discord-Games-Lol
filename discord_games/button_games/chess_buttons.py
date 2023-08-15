@@ -51,7 +51,7 @@ class ChessInput(discord.ui.Modal, title="Make your move"):
         description=(
             f"<:cross:1120656618296717312> | Invalid coordinates, cannot move from `{from_coord}` to `{to_coord}`"
         ),
-        color=0xFF0000,  # You can set the color as per your preference
+        color=0x2C2F33,  # You can set the color as per your preference
     ),
     ephemeral=True,
 )
@@ -75,20 +75,32 @@ class ChessButton(WordInputButton):
         game = self.view.game
         if interaction.user not in (game.black, game.white):
             return await interaction.response.send_message(
-                "<:cross:1120656618296717312> | You are not playing this game.", ephemeral=True
-            )
+    embed=discord.Embed(
+        description=(
+            f"<:cross:1120656618296717312> | You are not playing this game."
+        ),
+        color=0x2C2F33,  # You can set the color as per your preference
+    ),
+    ephemeral=True,
+)
         else:
             if self.label == "Cancel":
                 self.view.disable_all()
                 await interaction.message.edit(view=self.view)
                 username = interaction.user.name
-                await interaction.response.send_message(f"Game Over, Cancelled by {username}.")
+                await interaction.response.send_message(f"Game Over, Cancelled by **{username}**.")
                 return self.view.stop()
             else:
                 if interaction.user != game.turn:
                     return await interaction.response.send_message(
-                        "<:cross:1120656618296717312> | Wait for your turn.", ephemeral=True
-                    )
+    embed=discord.Embed(
+        description=(
+            f"<:cross:1120656618296717312> | Wait for your turn."
+        ),
+        color=0x2C2F33,  # You can set the color as per your preference
+    ),
+    ephemeral=True,
+)
                 else:
                     return await interaction.response.send_modal(ChessInput(self.view))
 
