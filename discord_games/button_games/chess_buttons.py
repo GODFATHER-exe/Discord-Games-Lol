@@ -84,10 +84,10 @@ class ChessButton(WordInputButton):
     ephemeral=True,
 )
         else:
-            if self.label == "Cancel":
-    self.view.disable_all()
+            self.label == "Cancel":
+                self.view.disable_all()
     await interaction.message.edit(view=self.view)
-    username = interaction.user.name
+                username = interaction.user.name
     
     embed = discord.Embed(
         description=f"Game Over, Cancelled by **{username}**.",
@@ -95,7 +95,7 @@ class ChessButton(WordInputButton):
     )
     await interaction.response.send_message(embed=embed, ephemeral=True)
     
-    return self.view.stop()
+           return self.view.stop()
     
             else:
                 if interaction.user != game.turn:
