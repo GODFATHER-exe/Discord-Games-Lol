@@ -9,7 +9,7 @@ from .wordle_buttons import WordInputButton
 from ..utils import DiscordColor, DEFAULT_COLOR, BaseView
 
 
-class ChessInput(discord.ui.Modal, title="Make your move"):
+class ChessInput(discord.ui.Modal, title="Move"):
     def __init__(self, view: ChessView) -> None:
         super().__init__()
         self.view = view
@@ -50,7 +50,7 @@ class ChessInput(discord.ui.Modal, title="Make your move"):
                 description=(
                     f"<:cross:1120656618296717312> | Invalid coordinates, cannot move from `{from_coord}` to `{to_coord}`"
                 ),
-                color=0x01f5b6,  # You can set the color as per your preference
+                color=0x2C2F33,  # You can set the color as per your preference
             )
             return await interaction.response.send_message(embed=embed, ephemeral=True)
         else:
@@ -88,7 +88,7 @@ class ChessButton(WordInputButton):
                     description=f"Game Over, Cancelled by **{username}**.",
                     color=0x2C2F33,
                 )
-                await interaction.response.send_message(embed=embed, ephemeral=True)
+                await interaction.response.send_message(embed=embed, ephemeral=False)
                 return self.view.stop()
             else:
                 if interaction.user != game.turn:
@@ -147,7 +147,7 @@ class BetaChess(Chess):
         discord.Message
             returns the game message
         """
-        self.embed_color = 0x01f5b6
+        self.embed_color = 0x2C2F33
 
         embed = await self.make_embed()
         self.view = ChessView(self, timeout=timeout)
