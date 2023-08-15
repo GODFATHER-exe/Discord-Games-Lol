@@ -46,15 +46,13 @@ class ChessInput(discord.ui.Modal, title="Make your move"):
             is_valid_uci = False
 
         if not is_valid_uci:
-            return await interaction.response.send_message(
-    embed=discord.Embed(
-        description=(
-            f"<:cross:1120656618296717312> | Invalid coordinates, cannot move from `{from_coord}` to `{to_coord}`"
-        ),
-        color=0x01f5b6,  # You can set the color as per your preference
-    ),
-    ephemeral=True,
-)
+            embed = discord.Embed(
+                description=(
+                    f"<:cross:1120656618296717312> | Invalid coordinates, cannot move from `{from_coord}` to `{to_coord}`"
+                ),
+                color=0x01f5b6,  # You can set the color as per your preference
+            )
+            return await interaction.response.send_message(embed=embed, ephemeral=True)
         else:
             await game.place_move(uci)
 
@@ -74,40 +72,35 @@ class ChessButton(WordInputButton):
     async def callback(self, interaction: discord.Interaction) -> None:
         game = self.view.game
         if interaction.user not in (game.black, game.white):
-            return await interaction.response.send_message(
-    embed=discord.Embed(
-        description=(
-            f"<:cross:1120656618296717312> | You are not playing this game."
-        ),
-        color=0x2C2F33,  # You can set the color as per your preference
-    ),
-    ephemeral=True,
-)
+            embed = discord.Embed(
+                description=(
+                    f"<:cross:1120656618296717312> | You are not playing this game."
+                ),
+                color=0x2C2F33,  # You can set the color as per your preference
+            )
+            return await interaction.response.send_message(embed=embed, ephemeral=True)
         else:
             if self.label == "Cancel":
                 self.view.disable_all()
-    await interaction.message.edit(view=self.view)
+                await interaction.message.edit(view=self.view)
                 username = interaction.user.name
-    
-    embed = discord.Embed(
-        description=f"Game Over, Cancelled by **{username}**.",
-        color=0x2C2F33,
-    )
-    await interaction.response.send_message(embed=embed, ephemeral=True)
-    
-           return self.view.stop()
-    
+                embed = discord.Embed(
+                    description=f"Game Over, Cancelled by **{username}**.",
+                    color=0x2C2F33,
+                )
+                await interaction.response.send_message(embed=embed, ephemeral=True)
+                return self.view.stop()
             else:
                 if interaction.user != game.turn:
+                    embed = discord.Embed(
+                        description=(
+                            f"<:cross:1120656618296717312> | Wait for your turn."
+                        ),
+                        color=0x2C2F33,  # You can set the color as per your preference
+                    )
                     return await interaction.response.send_message(
-    embed=discord.Embed(
-        description=(
-            f"<:cross:1120656618296717312> | Wait for your turn."
-        ),
-        color=0x2C2F33,  # You can set the color as per your preference
-    ),
-    ephemeral=True,
-)
+                        embed=embed, ephemeral=True
+                    )
                 else:
                     return await interaction.response.send_modal(ChessInput(self.view))
 
