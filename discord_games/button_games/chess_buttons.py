@@ -84,7 +84,7 @@ class ChessButton(WordInputButton):
     ephemeral=True,
 )
         else:
-            self.label == "Cancel":
+            if self.label == "Cancel":
                 self.view.disable_all()
     await interaction.message.edit(view=self.view)
                 username = interaction.user.name
