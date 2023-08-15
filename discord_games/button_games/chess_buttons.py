@@ -47,9 +47,14 @@ class ChessInput(discord.ui.Modal, title="Make your move"):
 
         if not is_valid_uci:
             return await interaction.response.send_message(
-                f"<:cross:1120656618296717312> | Invalid coordinates, cannot move from`{from_coord}` to `{to_coord}`",
-                ephemeral=True,
-            )
+    embed=discord.Embed(
+        description=(
+            f"<:cross:1120656618296717312> | Invalid coordinates, cannot move from `{from_coord}` to `{to_coord}`"
+        ),
+        color=0xFF0000,  # You can set the color as per your preference
+    ),
+    ephemeral=True,
+)
         else:
             await game.place_move(uci)
 
